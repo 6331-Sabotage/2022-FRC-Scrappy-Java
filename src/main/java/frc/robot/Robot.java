@@ -27,6 +27,8 @@ public class Robot extends TimedRobot {
 	Joystick input = new Joystick(0);
 	
 	Drivetrain drivetrain = new Drivetrain(0.5);
+
+	Intake intake = new Intake();
 	
 	/**
 	* This function is run when the robot is first started up and should be used for any
