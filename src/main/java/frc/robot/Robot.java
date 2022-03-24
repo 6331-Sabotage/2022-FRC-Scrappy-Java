@@ -96,13 +96,16 @@ public class Robot extends TimedRobot {
 		System.out.println(limelight.getValues());
 		limelight.post();
 
-		if (input.getTrigger()) {
-			if (drivetrain.followTarget(limelight)) {
-				if (shooty.setSpeed(limelight)) {
-					intake.in(true);
-				}	
-			}
-		}
+		// if (input.getTrigger()) {
+		// 	if (drivetrain.followTarget(limelight)) {
+		// 		if (shooty.setSpeed(limelight)) {
+		// 			intake.in(true);
+		// 		}	
+		// 	}
+		// }
+
+		shooty.run(input.getTrigger());
+		intake.in(input.getTop());
 	}
 	
 	/** This function is called once when the robot is disabled. */

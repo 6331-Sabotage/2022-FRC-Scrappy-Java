@@ -2,9 +2,11 @@ package frc.robot.components;
 
 import frc.robot.adapters.VictorMotorAdapter;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -20,18 +22,18 @@ public class Shooter {
 
     public Shooter() {
         this.encoder = this.m_shoot2.getEncoder();
+        m_shoot2.setIdleMode(IdleMode.kCoast);
+        m_shoot1.setNeutralMode(NeutralMode.Coast);
     }
 
     public boolean setSpeed(Limelight limelight) {
         double area = limelight.getValues().area;
+        
         // TODO : Magic
+
         double speed = 0 /*change later*/;
         
-        if (this.encoder.getVelocity() < speed) {
-            m_shoot.set(1);
-        } else {
-            m_shoot.set(0);
-        };
+        run(this.encoder.getVelocity() < speed);
 
         final double value = 1;
         if ((this.encoder.getVelocity() < speed - value) ||
@@ -40,6 +42,10 @@ public class Shooter {
             } else {
                 return true;
             }
+    }
+
+    public void run(boolean go) {
+        m_shoot.set(go ? 1 : 0);
     }
 
 }
