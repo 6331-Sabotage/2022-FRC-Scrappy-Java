@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.components.Drivetrain;
+import frc.robot.components.Intake;
 
 /**
 * The VM is configured to automatically run this class, and to call the functions corresponding to
