@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.components.Drivetrain;
 import frc.robot.components.Intake;
+import frc.robot.components.Limelight;
+import frc.robot.components.Shooter;
 
 /**
 * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -27,6 +29,9 @@ public class Robot extends TimedRobot {
 	Joystick input = new Joystick(0);
 	
 	Drivetrain drivetrain = new Drivetrain(0.5);
+	Intake intake = new Intake(0.5);
+	Limelight limelight = new Limelight();
+	Shooter shooty = new Shooter();
 	
 	/**
 	* This function is run when the robot is first started up and should be used for any
@@ -88,6 +93,16 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		drivetrain.drive(input.getRawAxis(1), input.getRawAxis(0));
+		System.out.println(limelight.getValues());
+		limelight.post();
+
+		if (input.getTrigger()) {
+			if (drivetrain.followTarget(limelight)) {
+				if (shooty.setSpeed(limelight)) {
+					intake.in(true);
+				}	
+			}
+		}
 	}
 	
 	/** This function is called once when the robot is disabled. */

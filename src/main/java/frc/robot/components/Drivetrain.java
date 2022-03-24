@@ -27,4 +27,19 @@ public class Drivetrain {
     public void drive(double yAxis, double xAxis) {
         m_drive.arcadeDrive(yAxis, -xAxis);
     }
+
+    public boolean followTarget(Limelight limelight) {
+        double x = limelight.getValues().x;
+        double deadzone = 0.5;
+        if (x > deadzone) {
+            m_drive.arcadeDrive(0, 0.5);
+            return false;
+        } else if (x < deadzone) {
+            m_drive.arcadeDrive(0, -0.5);
+            return false;
+        } else {
+            m_drive.arcadeDrive(0, 0);
+            return true;
+        }
+    }
 }
