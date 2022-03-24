@@ -1,17 +1,20 @@
 package frc.robot.components;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 public class Drivetrain {
-    Spark m_frontLeft = new Spark(0);
-    Spark m_rearLeft = new Spark(0);
+    CANSparkMax m_frontLeft = new CANSparkMax(2, MotorType.kBrushless);
+    CANSparkMax m_rearLeft = new CANSparkMax(8, MotorType.kBrushless);
+    
     MotorControllerGroup m_left = new MotorControllerGroup(m_frontLeft, m_rearLeft);
 
-    Spark m_frontRight = new Spark(0);
-    Spark m_rearRight = new Spark(0);
+    CANSparkMax m_frontRight = new CANSparkMax(4, MotorType.kBrushless);
+    CANSparkMax m_rearRight = new CANSparkMax(3, MotorType.kBrushless);
+    
     MotorControllerGroup m_right = new MotorControllerGroup(m_frontRight, m_rearRight);
 
     DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
@@ -22,6 +25,6 @@ public class Drivetrain {
     }
 
     public void drive(double yAxis, double xAxis) {
-        m_drive.arcadeDrive(yAxis, xAxis);
+        m_drive.arcadeDrive(yAxis, -xAxis);
     }
 }
