@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
 	Joystick input = new Joystick(0);
 	
 	Drivetrain drivetrain = new Drivetrain(0.5);
+	Intake intake = new Intake(0.5);
 	
 	/**
 	* This function is run when the robot is first started up and should be used for any
@@ -88,6 +89,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		drivetrain.drive(input.getRawAxis(1), input.getRawAxis(0));
+		intake.run(input.getRawButton(1) || input.getRawButton(2), input.getRawButton(1));
 	}
 	
 	/** This function is called once when the robot is disabled. */
