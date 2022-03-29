@@ -25,6 +25,6 @@ public class Drivetrain {
     }
 
     public void drive(double yAxis, double xAxis) {
-        m_drive.arcadeDrive(yAxis, -xAxis);
+        m_drive.arcadeDrive(yAxis, xAxis);
     }
 }
