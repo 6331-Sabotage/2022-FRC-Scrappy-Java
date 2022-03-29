@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.components.Drivetrain;
-import frc.robot.components.Intake;
+import frc.robot.components.Shooter;
 
 /**
 * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
 	Joystick input = new Joystick(0);
 	
 	Drivetrain drivetrain = new Drivetrain(0.5);
+	Shooter shooty = new Shooter(0.5);
 	
 	/**
 	* This function is run when the robot is first started up and should be used for any
