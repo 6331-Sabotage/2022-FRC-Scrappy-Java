@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.components.Climber;
 import frc.robot.components.Drivetrain;
-import frc.robot.components.Intake;
 
 /**
 * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
 	Joystick input = new Joystick(0);
 	
 	Drivetrain drivetrain = new Drivetrain(0.5);
+	Climber monkey = new Climber(0.5);
 	
 	/**
 	* This function is run when the robot is first started up and should be used for any
@@ -88,6 +89,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		drivetrain.drive(input.getRawAxis(1), input.getRawAxis(0));
+		monkey.run(input.getRawButton(0) || input.getRawButton(0), input.getRawButton(0));
 	}
 	
 	/** This function is called once when the robot is disabled. */
