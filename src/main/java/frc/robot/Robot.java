@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
 	private String m_autoSelected;
 	private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
+
 	Timer timer = new Timer();
 	
 	Joystick input = new Joystick(0);
@@ -83,6 +84,7 @@ public class Robot extends TimedRobot {
 			// Put default auto code here
 			break;
 		} */
+    
 		System.out.println(timer.get());
 		if (timer.get() < 3) {
 			System.out.println(true);
