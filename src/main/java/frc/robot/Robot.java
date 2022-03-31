@@ -96,7 +96,10 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		drivetrain.drive(input.getRawAxis(1), input.getRawAxis(0));
+		double throttle = input.getRawAxis(1);
+		double rotation = input.getRawAxis(0);
+
+		drivetrain.drive(throttle, rotation);
 	}
 	
 	/** This function is called once when the robot is disabled. */
