@@ -6,7 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,8 +22,6 @@ public class Robot extends TimedRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private final SendableChooser<String> m_chooser = new SendableChooser<>();
-
-	Timer a_timer = new Timer();
 	
 	Joystick input = new Joystick(0);
 	
@@ -66,15 +63,12 @@ public class Robot extends TimedRobot {
 		m_autoSelected = m_chooser.getSelected();
 		// m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
-
-		this.a_timer.reset();
-		this.a_timer.start();
 	}
 	
 	/** This function is called periodically during autonomous. */
 	@Override
 	public void autonomousPeriodic() {
-		/* switch (m_autoSelected) {
+		switch (m_autoSelected) {
 			case kCustomAuto:
 			// Put custom auto code here
 			break;
@@ -82,10 +76,6 @@ public class Robot extends TimedRobot {
 			default:
 			// Put default auto code here
 			break;
-		} */
-
-		if (a_timer.get() > 3) {
-			drivetrain.drive(-0.25, 0);
 		}
 	}
 	
