@@ -24,7 +24,8 @@ public class Robot extends TimedRobot {
 	private String m_autoSelected;
 	private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-	Timer a_timer = new Timer();
+
+	Timer timer = new Timer();
 	
 	Joystick input = new Joystick(0);
 	
@@ -67,8 +68,8 @@ public class Robot extends TimedRobot {
 		// m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
 
-		this.a_timer.reset();
-		this.a_timer.start();
+		timer.reset();
+		timer.start();
 	}
 	
 	/** This function is called periodically during autonomous. */
@@ -83,9 +84,11 @@ public class Robot extends TimedRobot {
 			// Put default auto code here
 			break;
 		} */
-
-		if (a_timer.get() > 3) {
-			drivetrain.drive(-0.25, 0);
+    
+		System.out.println(timer.get());
+		if (timer.get() < 3) {
+			System.out.println(true);
+			drivetrain.drive(-0.75, 0);
 		}
 	}
 	
