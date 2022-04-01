@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,11 +24,14 @@ public class Robot extends TimedRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+
+	Timer timer = new Timer();
 	
 	Joystick input = new Joystick(0);
 	
 	Drivetrain drivetrain = new Drivetrain(0.5);
-	Climber monkey = new Climber(0.5);
+	Climber monkey = new Climber(1);
 	
 	/**
 	* This function is run when the robot is first started up and should be used for any
@@ -65,12 +69,15 @@ public class Robot extends TimedRobot {
 		m_autoSelected = m_chooser.getSelected();
 		// m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
+
+		timer.reset();
+		timer.start();
 	}
 	
 	/** This function is called periodically during autonomous. */
 	@Override
 	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
+		/* switch (m_autoSelected) {
 			case kCustomAuto:
 			// Put custom auto code here
 			break;
@@ -78,6 +85,12 @@ public class Robot extends TimedRobot {
 			default:
 			// Put default auto code here
 			break;
+		} */
+    
+		System.out.println(timer.get());
+		if (timer.get() < 3) {
+			System.out.println(true);
+			drivetrain.drive(-0.75, 0);
 		}
 	}
 	
@@ -88,8 +101,12 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically during operator control. */
 	@Override
 	public void teleopPeriodic() {
-		drivetrain.drive(input.getRawAxis(1), input.getRawAxis(0));
-		monkey.run(input.getRawButton(0) || input.getRawButton(0), input.getRawButton(0));
+		double throttle = input.getRawAxis(1);
+		double rotation = input.getRawAxis(0);
+		int pov = input.getPOV();
+
+		drivetrain.drive(throttle, rotation);
+		monkey.run(pov == 0 || pov == 180, pov == 0);
 	}
 	
 	/** This function is called once when the robot is disabled. */
@@ -99,7 +116,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically when disabled. */
 	@Override
 	public void disabledPeriodic() {}
-	
+
 	/** This function is called once when test mode is enabled. */
 	@Override
 	public void testInit() {}
