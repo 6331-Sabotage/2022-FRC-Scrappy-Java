@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import frc.robot.components.Climber;
 import frc.robot.components.Drivetrain;
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
 	Joystick input = new Joystick(0);
 	
 	Drivetrain drivetrain = new Drivetrain(0.5);
+	Climber monkey = new Climber(1);
 	
 	/**
 	* This function is run when the robot is first started up and should be used for any
@@ -101,8 +103,10 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		double throttle = input.getRawAxis(1);
 		double rotation = input.getRawAxis(0);
+		int pov = input.getPOV();
 
 		drivetrain.drive(throttle, rotation);
+		monkey.run(pov == 0 || pov == 180, pov == 0);
 	}
 	
 	/** This function is called once when the robot is disabled. */
@@ -112,7 +116,7 @@ public class Robot extends TimedRobot {
 	/** This function is called periodically when disabled. */
 	@Override
 	public void disabledPeriodic() {}
-	
+
 	/** This function is called once when test mode is enabled. */
 	@Override
 	public void testInit() {}
